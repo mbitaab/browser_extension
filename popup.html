@@ -95,10 +95,20 @@
     <div id="info"></div>
   </div>
 
-  <div class="satisfaction-query" style="margin-top: 15px;">Are you satisfied with this safety check?</div>
-  <button id="yes" class="button yes-button">Yes</button>
-  <button id="no" class="button not-sure-button">Not Sure</button>
-  <button id="ns" class="button no-button">No</button>
+  <div class="satisfaction-query" style="margin-top: 15px;">
+    <div id="submission_form" style="display: center;">
+    </hr>Are you satisfied with this safety check?</br></br>
+      <button id="yes" class="button yes-button">Yes</button>
+      <button id="no" class="button not-sure-button">Not Sure</button>
+      <button id="ns" class="button no-button">No</button>
+      <form id="myForm">
+        <input type="hidden" id="response" name="response" value="NA">
+      </form>
+    </div>
+    <div id="feedback_response" style="display: none;">
+      <!-- show response from feedback API here -->
+    </div>
+  </div>
 </div>
 
 <script src="popup.js"></script>
