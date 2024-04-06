@@ -5,6 +5,14 @@ const extractDomain = (url) => {
 };
 
 
+chrome.action.onClicked.addListener((tab) => {
+  // Perform the action you want when the extension icon is clicked
+  console.log('Extension icon clicked', tab);
+  // You can also perform actions like opening a new tab with a specific URL
+  // chrome.tabs.create({ url: 'https://example.com' });
+});
+
+
 // define listeners
 document.addEventListener('DOMContentLoaded', function() {
 
@@ -15,10 +23,52 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // create the hidden form input
     document.getElementById('response').value = extractDomain(currentTab.url);
+  
+    // Show the loading gif
+    document.getElementById('loadingGif').classList.remove('hidden');
+  
+    console.log('http://localhost:8080/api/merchant/status?domain=' + extractDomain(currentTab.url));
+
+    // Send the API request
+    fetch('http://localhost:8080/api/merchant/status?domain=' + extractDomain(currentTab.url))
+      .then(response => response.json())
+      .then(data => {
+        // Check if the feedback includes "queued"
+        if (data.data == 'queued') {
+          // Poll the API every 60 seconds
+          const intervalId = setInterval(() => {
+            fetch('http://localhost:8080/api/merchant/status?domain=' + extractDomain(currentTab.url))
+              .then(response => response.json())
+              .then(updatedData => {
+                console.log(updatedData)
+                if (!(updatedData.data == 'queued')) {
+                  // If the status is no longer "queued", show the results and clear the interval
+                  if (updatedData.data[0]['scam'] == 1) {
+                    document.getElementById('unsafe').classList.remove('hidden');
+                  } else {
+                    document.getElementById('safe').classList.remove('hidden');
+                  }
+                  //document.getElementById('info').textContent = JSON.stringify(updatedData);
+                  clearInterval(intervalId);
+                  document.getElementById('loadingGif').classList.add('hidden');
+                }
+              }); 
+          }, 20000);
+        } else {
+          // If the feedback does not include "queued", show the results immediately
+          if (data.data[0]['scam'] == 1) {
+            document.getElementById('unsafe').classList.remove('hidden');
+          } else {
+            document.getElementById('safe').classList.remove('hidden');
+          }
+          document.getElementById('loadingGif').classList.add('hidden');
+        }
+      });
+
   });
 
   // Display additional information
-  document.getElementById('info').textContent = 'Some additional info here';
+  document.getElementById('info').textContent = '';
 
   // Add event listeners for buttons
   document.getElementById('yes').addEventListener('click', function() {
