@@ -1,8 +1,9 @@
 // define functions
 const extractDomain = (url) => {
-  const match = url.match(/^https?:\/\/([^\/]+)/);
+  const match = url.match(/^(?:https?:\/\/)?(?:www\.)?([^\/]+)/);
   return match ? match[1] : null;
 };
+
 
 
 chrome.action.onClicked.addListener((tab) => {
