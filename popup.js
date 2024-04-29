@@ -1,4 +1,4 @@
-BASE_URL ="http://10.90.78.133:811"
+BASE_URL ="http://3.128.204.19:45562"
 
 // define functions
 const extractDomain = (url) => {
@@ -70,8 +70,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // Add event listeners for buttons
   document.getElementById('yes').addEventListener('click', function () {
+
     console.log('Submitting Feedback');
-    fetch(`${BASE_URL}/api/merchant/report?response=${document.getElementById('response').value}&user_feedback=good`)
+    fetch(`${BASE_URL}/api/report/submite?domain=${document.getElementById('response').value}&scam=-1&text=TEST`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.status}`);
@@ -99,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementsByClassName('safe')[0].style.display = 'center';
     document.getElementsByClassName('unsafe')[0].style.display = 'none';
 
-    fetch(`${BASE_URL}/api/merchant/report?response=${document.getElementById('response').value}&user_feedback=notsure`)
+    fetch(`${BASE_URL}/api/report/submite?domain=${document.getElementById('response').value}&user_feedback=0&text=TEST`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.status}`);
@@ -127,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementsByClassName('safe')[0].style.display = 'none';
     document.getElementsByClassName('unsafe')[0].style.display = 'flex';
 
-    fetch(`${BASE_URL}/api/merchant/report?response=${document.getElementById('response').value}&user_feedback=bad`)
+    fetch(`${BASE_URL}/api/report/submite?domain=${document.getElementById('response').value}&user_feedback=1&text=TEST`)
       .then(response => {
         if (!response.ok) {
           throw new Error(`Network response was not ok: ${response.status}`);
