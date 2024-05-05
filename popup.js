@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('safe').classList.remove('hidden');
           }
 
-          if (data.data['isFraud'] == 1) {
+          if (data.data['isFraud'] > 1) {
             document.getElementById('fraud').classList.remove('hidden');
           }
           document.getElementById('loadingGif').classList.add('hidden');
