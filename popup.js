@@ -41,23 +41,31 @@ document.addEventListener('DOMContentLoaded', function () {
                 console.log(updatedData)
                 if (!(updatedData.data == 'queued')) {
                   // If the status is no longer "queued", show the results and clear the interval
-                  if (updatedData.data[0]['scam'] == 1) {
+                  if (updatedData.data['isScam'] == true) {
                     document.getElementById('unsafe').classList.remove('hidden');
                   } else {
                     document.getElementById('safe').classList.remove('hidden');
                   }
+                  
+                  if (updatedData.data['isFraud'] == 1) {
+                    document.getElementById('fraud').classList.remove('hidden');
+                  }
                   //document.getElementById('info').textContent = JSON.stringify(updatedData);
-                  clearInterval(intervalId);
+                  //clearInterval(intervalId);
                   document.getElementById('loadingGif').classList.add('hidden');
                 }
               });
-          }, 20000);
+          }, 10000);
         } else {
           // If the feedback does not include "queued", show the results immediately
-          if (data.data[0]['scam'] == 1) {
+          if (data.data['isScam'] == true) {
             document.getElementById('unsafe').classList.remove('hidden');
           } else {
             document.getElementById('safe').classList.remove('hidden');
+          }
+
+          if (data.data['isFraud'] == 1) {
+            document.getElementById('fraud').classList.remove('hidden');
           }
           document.getElementById('loadingGif').classList.add('hidden');
         }
