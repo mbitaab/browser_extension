@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     document.getElementById('safe').classList.remove('hidden');
                   }
                   
-                  if (updatedData.data['isFraud'] == 1) {
+                  if (updatedData.data['isFraud'] >= 1) {
                     document.getElementById('fraud').classList.remove('hidden');
                   }
                   //document.getElementById('info').textContent = JSON.stringify(updatedData);
@@ -63,11 +63,11 @@ document.addEventListener('DOMContentLoaded', function () {
           } else {
             document.getElementById('safe').classList.remove('hidden');
           }
+          document.getElementById('loadingGif').classList.add('hidden');
 
-          if (data.data['isFraud'] > 1) {
+          if (data.data['isFraud'] >= 1) {
             document.getElementById('fraud').classList.remove('hidden');
           }
-          document.getElementById('loadingGif').classList.add('hidden');
         }
       });
 
