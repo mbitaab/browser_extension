@@ -1,4 +1,4 @@
-BASE_URL ="http://3.128.204.19:45562"
+BASE_URL ="http://3.142.164.146:45562"
 
 // define functions
 const extractDomain = (url) => {
