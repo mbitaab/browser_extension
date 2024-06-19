@@ -3,7 +3,7 @@
     "name": "Scam Checker",
     "version": "1.02",
     "description": "Fetches current tab's URL and sends it to an external API",
-    "permissions": ["activeTab", "tabs", "scripting"],
+    "permissions": ["activeTab", "tabs"],
     "web_accessible_resources": [{ 
       "resources": ["images/*", "*.js"],
       "matches": ["http://*/*", "https://*/*"]
