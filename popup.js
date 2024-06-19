@@ -105,8 +105,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('no').addEventListener('click', function () {
     // Handle Button 2 click
     console.log('Button 2 clicked');
-    document.getElementsByClassName('safe')[0].style.display = 'center';
-    document.getElementsByClassName('unsafe')[0].style.display = 'none';
 
     fetch(`${BASE_URL}/api/report/submite?domain=${document.getElementById('response').value}&user_feedback=0&text=TEST`)
       .then(response => {
@@ -133,8 +131,6 @@ document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('ns').addEventListener('click', function () {
     // Handle Button 2 click
     console.log('Button 3 clicked');
-    document.getElementsByClassName('safe')[0].style.display = 'none';
-    document.getElementsByClassName('unsafe')[0].style.display = 'flex';
 
     fetch(`${BASE_URL}/api/report/submite?domain=${document.getElementById('response').value}&user_feedback=1&text=TEST`)
       .then(response => {
